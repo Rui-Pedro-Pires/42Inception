@@ -7,4 +7,6 @@ GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE}.* TO '${MARIADB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
-mysqld
+mysql_install_db
+
+mysqld --init-file=/etc/mysql/init.sql

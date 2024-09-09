@@ -1,15 +1,17 @@
 FROM debian:bullseye
 
-RUN apt-get update && \
-    apt-get upgrade -y && \ 
-    apt-get install nginx -y
+RUN apt update && apt install -y nginx openssl
 
-COPY ./conf/nginx.conf  /etc/nginx/conf.d/default.conf
+RUN mkdir -p /etc/nginx/ssl && \
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/nginx/ssl/nginx.key \
+    -out /etc/nginx/ssl/nginx.crt \
+    -subj "/CN=localhost"
 
-RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 80
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
