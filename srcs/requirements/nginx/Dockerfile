@@ -9,9 +9,5 @@ RUN mkdir -p /etc/nginx/ssl && \
     -subj "/CN=localhost"
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./conf/nginx.conf /etc/nginx/sites-available/default
-
-EXPOSE 80
-EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]

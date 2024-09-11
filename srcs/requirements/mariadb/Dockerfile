@@ -12,6 +12,4 @@ RUN chmod +x /init-db.sh
 
 RUN mkdir /run/mysqld
 
-EXPOSE 3306
-
-CMD ["/bin/bash", "-c", "/init-db.sh"]
+ENTRYPOINT ["/init-db.sh"]

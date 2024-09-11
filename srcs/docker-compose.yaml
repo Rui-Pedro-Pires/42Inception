@@ -4,11 +4,12 @@ services:
     build: ./requirements/nginx/
     ports:
       - "443:443"
-    volumes:
-      - v_web:/var/www/html
+    expose:
+      - 443
     depends_on:
       - wordpress
-      - mariadb
+    volumes:
+      - wordpress_vol:/var/www/html
     networks:
       - inception
   wordpress:
@@ -17,38 +18,37 @@ services:
     env_file:
       - .env
     expose:
-      - "9000"
-    volumes:
-      - v_web:/var/www/html
+      - 9000
     depends_on:
       - mariadb
+    volumes:
+      - wordpress_vol:/var/www/html
     networks:
       - inception
   mariadb:
     container_name: mariadb
-    build:
-      context: ./requirements/mariadb/
+    build: ./requirements/mariadb/
     env_file:
       - .env
     expose:
-      - "3306"
+      - 3306
     volumes:
-      - v_db:/var/lib/mysql
+      - mariadb_vol:/var/lib/mysql
     networks:
       - inception
 volumes:
-  v_web:
+  wordpress_vol:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ruiolive/42Inception/data/wordpress
-  v_db:
+      device: /home/${USER}/data/wordpress
+  mariadb_vol:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ruiolive/42Inception/data/mariadb
+      device: /home/${USER}/data/mariadb
 networks:
   inception:
     driver: bridge
