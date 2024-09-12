@@ -50,6 +50,9 @@ services:
       - wordpress_vol:/var/www/html
     networks:
       - inception
+    ports:
+      - "20:20"
+      - "21:21"
 volumes:
   wordpress_vol:
     driver: local

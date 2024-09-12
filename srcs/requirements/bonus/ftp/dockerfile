@@ -3,11 +3,9 @@ FROM debian:bullseye
 RUN apt-get update && apt-get upgrade -y && \
     apt install -y vsftpd openssl
 
-
-RUN mkdir -p /var/run/vsftpd/empty \
-    && mkdir -p /etc/service/vsftpd && \
-    mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www/html
+RUN mkdir -p /var/run/vsftpd/empty /etc/vsftpd/ssl /var/www/html && \
+    chmod 755 /var/run/vsftpd/empty && \
+    chmod 755 /var/www/html
 
 RUN mkdir -p /etc/vsftpd/ssl && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -15,7 +13,10 @@ RUN mkdir -p /etc/vsftpd/ssl && \
     -out /etc/vsftpd/ssl/vsftpd.crt \
     -subj "/CN=localhost"
 
-COPY ./conf/vsftpd.conf /etc/vsftpd.conf
-COPY ./conf/vsftpd.chroot_list /etc/vsftpd.chroot_list
-
-CMD ["/usr/sbin/vsftpd", "/etc/vsftpd.conf"]
+RUN useradd -d /var/www/html ftpuser && echo "ftpuser:password" | chpasswd
+    
+COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
+    
+EXPOSE 20 21
+    
+CMD [ "vsftpd", "/etc/vsftpd/vsftpd.conf" ]
