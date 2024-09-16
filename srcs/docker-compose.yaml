@@ -53,6 +53,19 @@ services:
     ports:
       - "20:20"
       - "21:21"
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    volumes:
+      - wordpress_vol:/var/www/html
+    expose:
+      - 6379
+    ports:
+      - "6379:6379"
+    depends_on:
+      - wordpress
+    networks:
+      - inception
 volumes:
   wordpress_vol:
     driver: local
