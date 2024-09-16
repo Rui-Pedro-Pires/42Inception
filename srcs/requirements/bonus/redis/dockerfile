@@ -8,6 +8,4 @@ RUN apt-get update && \
 
 COPY ./conf/redis.conf /etc/redis/redis.conf
 
-# RUN echo "extension=redis.so" > /etc/php/7.4/cli/conf.d/20-redis.ini
-
-CMD [ "redis-server" ]
+CMD ["redis-server", "/etc/redis/redis.conf"]
