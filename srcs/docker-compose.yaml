@@ -19,10 +19,11 @@ services:
       - .env
     expose:
       - 9000
-    depends_on:
-      - mariadb
     volumes:
       - wordpress_vol:/var/www/html
+    depends_on:
+      - mariadb
+      - redis
     networks:
       - inception
   mariadb:
@@ -62,8 +63,6 @@ services:
       - 6379
     ports:
       - "6379:6379"
-    depends_on:
-      - wordpress
     networks:
       - inception
 volumes:
