@@ -13,16 +13,6 @@ RUN mkdir -p /var/www/html
 COPY ./tools /var/www/html
 RUN chmod -R 755 /var/www/html
 
-
-# RUN echo 'server { \
-#     listen 450 ssl;  \
-#     server_name ruiolive.42.fr www.ruiolive.42.fr; \
-#     ssl_protocols TLSv1.2 TLSv1.3; \
-# 	ssl_certificate /etc/nginx/ssl/nginx.crt; \
-# 	ssl_certificate_key /etc/nginx/ssl/nginx.key;\
-#     root /var/www/html; \
-#     index index.html; \
-# }' > /etc/nginx/
 COPY ./conf/default /etc/nginx/sites-available/default
 
 CMD ["nginx", "-g", "daemon off;"]
