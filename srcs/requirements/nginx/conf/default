@@ -20,15 +20,8 @@ server {
         fastcgi_pass adminer:9000;
     }
 
-    location /static {
+    location /static/ {
         proxy_pass https://static:450/;
-        proxy_set_header X-Forwarded-Proto https;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
-    location ~* \.$ {
-        proxy_pass https://static:450;
         proxy_set_header X-Forwarded-Proto https;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
