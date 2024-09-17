@@ -1,0 +1,13 @@
+FROM debian:bullseye
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt install -y git-core nodejs npm
+
+RUN npm install -g hexo-cli
+
+RUN mkdir blog
+RUN hexo init blog
+WORKDIR /blog
+RUN npm install 
+
+CMD [ "hexo", "server" ]

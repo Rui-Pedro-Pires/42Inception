@@ -2,6 +2,7 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx/
+    restart: on_failure
     ports:
       - "443:443"
     expose:
@@ -16,6 +17,7 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
+    restart: on_failure
     env_file:
       - .env
     expose:
@@ -30,6 +32,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/
+    restart: on_failure
     env_file:
       - .env
     expose:
@@ -41,6 +44,7 @@ services:
   adminer:
     container_name: adminer
     build: ./requirements/bonus/adminer
+    restart: on_failure
     expose:
       - 9000
     networks:
@@ -48,6 +52,7 @@ services:
   ftp:
     container_name: ftp
     build: ./requirements/bonus/ftp
+    restart: on_failure
     volumes:
       - wordpress_vol:/var/www/html
     networks:
@@ -58,21 +63,27 @@ services:
   redis:
     container_name: redis
     build: ./requirements/bonus/redis
+    restart: on_failure
     volumes:
       - wordpress_vol:/var/www/html
     expose:
       - 6379
-    ports:
-      - "6379:6379"
     networks:
       - inception
   static:
     container_name: static
     build: ./requirements/bonus/static
+    restart: on_failure
     expose:
       - 450
-    ports:
-      - "450:450"
+    networks:
+      - inception
+  hexo:
+    container_name: hexo
+    build: ./requirements/bonus/hexo
+    restart: on_failure
+    expose:
+      - 4000
     networks:
       - inception
 volumes:
