@@ -8,6 +8,6 @@ RUN mkdir -p /etc/nginx/ssl && \
     -out /etc/nginx/ssl/nginx.crt \
     -subj "/CN=localhost"
 
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/default /etc/nginx/sites-available/default
 
 CMD ["nginx", "-g", "daemon off;"]
