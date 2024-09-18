@@ -74,6 +74,8 @@ services:
     container_name: static
     build: ./requirements/bonus/static
     restart: on-failure
+    volumes:
+      - static_vol:/var/www/html
     expose:
       - 450
     networks:
@@ -82,6 +84,8 @@ services:
     container_name: hexo
     build: ./requirements/bonus/hexo
     restart: on-failure
+    volumes:
+      - hexo_vol:/blog
     expose:
       - 4000
     networks:
@@ -99,6 +103,18 @@ volumes:
       type: none
       o: bind
       device: /home/${USER}/data/mariadb
+  static_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/static
+  hexo_vol:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/hexo
 networks:
   inception:
     driver: bridge

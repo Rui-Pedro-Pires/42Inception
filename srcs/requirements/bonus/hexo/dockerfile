@@ -8,6 +8,9 @@ RUN npm install -g hexo-cli
 RUN mkdir blog
 RUN hexo init blog
 WORKDIR /blog
-RUN npm install 
+COPY ./conf/_config.yml /blog/_config.yml
+RUN rm /blog/source/_posts/hello-world.md
+COPY ./posts/42.md /blog/source/_posts/42.md
+RUN npm install
 
 CMD [ "hexo", "server" ]

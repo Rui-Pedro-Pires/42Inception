@@ -1,5 +1,6 @@
 all:
-	mkdir -p /home/${USER}/data/mariadb && mkdir -p /home/${USER}/data/wordpress
+	mkdir -p /home/${USER}/data/mariadb && mkdir -p /home/${USER}/data/wordpress && \
+	mkdir -p /home/${USER}/data/static && mkdir -p /home/${USER}/data/hexo
 	@cd ./srcs && docker compose up --build -d
 
 down:
