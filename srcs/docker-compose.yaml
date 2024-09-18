@@ -82,7 +82,7 @@ services:
     volumes:
       - static_vol:/var/www/html
     expose:
-      - 450
+      - 2053
     networks:
       - inception
   hexo:
