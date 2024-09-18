@@ -8,11 +8,6 @@ services:
       - "443:443"
     expose:
       - 443
-    depends_on:
-      - wordpress
-      - static
-      - hexo
-      - adminer
     volumes:
       - wordpress_vol:/var/www/html
     networks:
@@ -29,8 +24,8 @@ services:
     volumes:
       - wordpress_vol:/var/www/html
     depends_on:
-      - mariadb
-      - redis
+      mariadb:
+        condition: service_started
     networks:
       - inception
   mariadb:
