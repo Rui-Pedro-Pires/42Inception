@@ -1,5 +1,8 @@
 FROM debian:bullseye
 
+ARG FTP_USER
+ARG FTP_PASSWORD
+
 RUN apt-get update && apt-get upgrade -y && \
     apt install -y vsftpd openssl
 
@@ -13,10 +16,10 @@ RUN mkdir -p /etc/vsftpd/ssl && \
     -out /etc/vsftpd/ssl/vsftpd.crt \
     -subj "/CN=localhost"
 
-RUN useradd -d /var/www/html ftpuser && echo "ftpuser:password" | chpasswd
+RUN useradd -d /var/www/html $FTP_USER && echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
     
 COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
-    
+
 EXPOSE 20 21
-    
+
 CMD [ "vsftpd", "/etc/vsftpd/vsftpd.conf" ]

@@ -1,6 +1,6 @@
 server {
-		listen 450 ssl default_server;
-        listen [::]:450 ssl default_server;
+		listen 2053 ssl default_server;
+        listen [::]:2053 ssl default_server;
         server_name ruiolive.42.fr;
 		ssl_protocols TLSv1.2 TLSv1.3;
         ssl_certificate /etc/nginx/ssl/nginx.crt;

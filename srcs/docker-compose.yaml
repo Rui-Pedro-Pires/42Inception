@@ -51,7 +51,12 @@ services:
       - inception
   ftp:
     container_name: ftp
-    build: ./requirements/bonus/ftp
+    build: 
+      context: ./requirements/bonus/ftp
+      args:
+        - FTP_USER=${FTP_USER}
+        - FTP_PASSWORD=${FTP_PASSWORD}
+
     restart: on-failure
     volumes:
       - wordpress_vol:/var/www/html
