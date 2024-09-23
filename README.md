@@ -2,7 +2,7 @@
 
 ## Description
 
-Inception is a system administration project that I worked on to explore Docker and virtualization. I created a personal virtual machine running multiple services, each in its own Docker container. The goal was to build a small infrastructure with services like NGINX, WordPress, and MariaDB, while ensuring proper containerization, networking, and security practices.
+Inception is a system administration project that I worked on to explore Docker and virtualization. The goal was to build a small infrastructure with services like NGINX, WordPress, and MariaDB, while ensuring proper containerization, networking, and security practices.
 
 ## Features
 
