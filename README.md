@@ -36,11 +36,11 @@ To set up the project:
 
 1. Clone my repository:
    ```bash
-   git clone git@github.com:Rui-Pedro-Pires/42Inception.git
+   git clone git@github.com:Rui-Pedro-Pires/Inception.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd inception
+   cd Inception
    ```
 3. Use the provided `Makefile` to build and run the Docker containers:
    ```bash
@@ -67,7 +67,3 @@ make re
 
 - Docker and Docker Compose.
 - Basic knowledge of system administration and security practices.
-
-## License
-
-This project is licensed under the MIT License.
